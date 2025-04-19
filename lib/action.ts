@@ -26,8 +26,9 @@ export default async function action({url, alias} : {url:string; alias:string}) 
         return { error : 'Alias is already taken, choose another one'}
     }
     await collection.insertOne( {alias, url}); 
-
-    return { success : true, 
-        shortened : `${process.env.NEXT_PUBLIC_URL}/${alias}`,
-};
+    
+    return {
+        success: true,
+        shortened: `${process.env.NEXT_PUBLIC_URL}/${alias}`,
+      };
 }
