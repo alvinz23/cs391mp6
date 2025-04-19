@@ -112,11 +112,14 @@ const Button = styled.button`
 `;
 
 
+
 export default function Home() {
   const [url, setUrl] = useState(""); 
   const [alias, setAlias] = useState(""); 
   const [result, setResult] = useState(""); 
   const [error, setError] = useState(""); 
+  const [copied, setCopied] = useState(false);
+
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -129,6 +132,12 @@ export default function Home() {
         } else {
       setResult(res.shortened);
     }
+  }
+
+  function handleCopy() {
+    navigator.clipboard.writeText(result);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
   }
 
   return (
@@ -168,15 +177,20 @@ export default function Home() {
             </Form>
           </Card>
           {result && (
-  <p style={{ color: "green", textAlign: "center", marginTop: "1rem" }}>
-    Shortened URL: <a href={result} target="_blank">{result}</a>
-  </p>
-)}
-{error && (
-  <p style={{ color: "red", textAlign: "center", marginTop: "1rem" }}>
-    {error}
-  </p>
-)}
+            <ResultCard>
+              <p>
+                Shortened URL : <a href={result} target="_blank" rel="noopener noreferrer">{result}</a>
+              </p>
+              <CopyButton onClick = {handleCopy}>
+                {copied ? "Copied!" : "Copy Link"}
+              </CopyButton>
+            </ResultCard>
+          )}
+          {error && (
+            <p style={{ color: "red", textAlign: "center", marginTop: "1rem" }}>
+              {error}
+            </p>
+          )}
         </Container>
       </Main>
     </>

@@ -27,5 +27,7 @@ export default async function action({url, alias} : {url:string; alias:string}) 
     }
     await collection.insertOne( {alias, url}); 
 
-    return { success : true, shortened : `${process.env.PUBLIC_URL}/${alias}`}
+    return { success : true, 
+        shortened : `${process.env.NEXT_PUBLIC_URL}/${alias}`,
+};
 }
