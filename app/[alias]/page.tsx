@@ -1,19 +1,22 @@
 import { redirect } from 'next/navigation';
 import getCollection, { URL_COLLECTION } from '@/db';
-
-export default async function AliasPage({params,}: {
-  params: { alias: string };
+export default async function AliasPage({
+  params,
+}: {
+  params: Promise<{ alias: string }>;
 }) {
-  const collection = await getCollection(URL_COLLECTION);
-  const entry = await collection.findOne({ alias: params.alias });
+  const { alias } = await params;
 
-  if (!entry) {
+  const collection = await getCollection(URL_COLLECTION);
+  const result = await collection.findOne({ alias });
+
+  if (!result) {
     return (
-      <div style={{ color: 'white', textAlign: 'center', paddingTop: '5rem' }}>
-        This link does not exist.
+        <div style={{ color: 'white', textAlign: 'center', paddingTop: '5rem' }}>
+            Link does not exist.
       </div>
     );
   }
 
-  redirect(entry.url);
+  redirect(result.url);
 }
