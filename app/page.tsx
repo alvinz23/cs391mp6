@@ -1,103 +1,159 @@
-import Image from "next/image";
+'use client';
+import styled from 'styled-components';
+import {useState} from 'react'; 
+import action from '../lib/action'; 
+
+const Main = styled.main`
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+`;
+
+const Container = styled.div`
+  max-width: 50rem;
+  width: 100%;
+`;
+
+const Card = styled.div`
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid black;
+  padding: 2rem;
+  margin: 2rem auto;
+  width: 100%;
+  max-width: 600px; 
+
+  @media (max-width: 640px) {
+    padding: 1.5rem;
+  }
+`;
+
+const Title = styled.h1`
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: #3b82f6;
+
+  @media (max-width: 640px) {
+    font-size: 2rem;
+  }
+`;
+
+const Subtitle = styled.p`
+  text-align: center;
+  color: #64748b;
+  margin-bottom: 2rem;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+`;
+
+const FormDiv = styled.div`
+  margin-bottom: 1rem;
+`;
+
+const Label = styled.label`
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+`;
+
+const Input = styled.input`
+  width: 90%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+`;
+
+const Button = styled.button`
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  width: 100%;
+
+  &:hover {
+    background-color: #2563eb;
+  }
+`;
+
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [url, setUrl] = useState(""); 
+  const [alias, setAlias] = useState(""); 
+  const [result, setResult] = useState(""); 
+  const [error, setError] = useState(""); 
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setError('');
+    setResult(''); 
+    const res = await action({ url, alias});
+    
+    if ("error" in res) {
+      setError(res.error); 
+        } else {
+      setResult(res.shortened);
+    }
+  }
+
+  return (
+    <>
+      <Main>
+        <Container>
+          <Card>
+            <Title>URL Shortener</Title>
+            <Subtitle>Create short links that have your own alias</Subtitle>
+            
+            <Form onSubmit = {handleSubmit}>
+              <FormDiv>
+                <Label htmlFor="url">Enter the URL you want to shorten</Label>
+                <Input
+                  id="url"
+                  type="text"
+                  value = {url} 
+                  onChange = {(e) => setUrl(e.target.value)}
+                  placeholder="https://example.com/your/url"
+                  required
+                />
+              </FormDiv>
+              
+              <FormDiv>
+                <Label htmlFor="alias">Choose a custom alias</Label>
+                <Input
+                  id="alias"
+                  type="text"
+                  placeholder="Example: funnyvideo35"
+                  onChange = {(e) => setAlias(e.target.value)}
+                  required
+                />
+              </FormDiv>
+              <Button type = "submit">
+                Shorten URL
+              </Button>
+            </Form>
+          </Card>
+          {result && (
+  <p style={{ color: "green", textAlign: "center", marginTop: "1rem" }}>
+    Shortened URL: <a href={result} target="_blank">{result}</a>
+  </p>
+)}
+{error && (
+  <p style={{ color: "red", textAlign: "center", marginTop: "1rem" }}>
+    {error}
+  </p>
+)}
+        </Container>
+      </Main>
+    </>
   );
 }
