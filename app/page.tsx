@@ -15,6 +15,31 @@ const Container = styled.div`
   max-width: 50rem;
   width: 100%;
 `;
+const ResultCard = styled.div`
+  background-color: #f9fafb;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  text-align: center;
+  word-break: break-word;
+`;
+
+const CopyButton = styled.button`
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #2563eb;
+  }
+`;
+
 
 const Card = styled.div`
   background-color: #ffffff;

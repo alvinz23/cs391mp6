@@ -1,11 +1,7 @@
 import { redirect } from 'next/navigation';
 import getCollection, { URL_COLLECTION } from '@/db';
 
-type PageProps = {
-  params: { alias: string };
-};
-
-export default async function AliasPage({ params }: PageProps) {
+export default async function AliasPage({ params }: { params: { alias: string } }) {
   const collection = await getCollection(URL_COLLECTION);
   const entry = await collection.findOne({ alias: params.alias });
 
