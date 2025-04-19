@@ -1,7 +1,11 @@
-import getCollection, { URL_COLLECTION } from '@/db';
 import { redirect } from 'next/navigation';
+import getCollection, { URL_COLLECTION } from '@/db';
 
-export default async function AliasPage({ params }: { params: { alias: string } }) {
+type PageProps = {
+  params: { alias: string };
+};
+
+export default async function AliasPage({ params }: PageProps) {
   const collection = await getCollection(URL_COLLECTION);
   const entry = await collection.findOne({ alias: params.alias });
 
@@ -15,9 +19,10 @@ export default async function AliasPage({ params }: { params: { alias: string } 
           fontSize: '1.5rem',
         }}
       >
-         This link does not exist.
+        This link does not exist.
       </div>
     );
   }
+
   redirect(entry.url);
 }
